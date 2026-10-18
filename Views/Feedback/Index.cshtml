@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_LayoutView.cshtml";
+}
+
+<div class="page-card">
+    @Html.Partial("~/Views/Shared/_StudentInfo.cshtml")
+
+    <p class="text-secondary mb-4">
+        Welcome to the Student Feedback Portal.
+        Share your thoughts about your subjects and learning
+        experience. Your valuable feedback helps us improve
+        the quality of education.
+    </p>
+
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="border rounded-3 p-4 h-100">
+                <h4 class="text-primary">Submit Feedback</h4>
+                <p class="text-secondary">
+                    Share your feedback about a subject.
+                </p>
+
+                <a href="@Url.Action("Create", "Feedback")"
+                   class="btn btn-primary">
+                    Give Feedback
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="border rounded-3 p-4 h-100">
+                <h4 class="text-primary">View Feedback</h4>
+                <p class="text-secondary">
+                    View feedback submitted by students.
+                </p>
+
+                <a href="@Url.Action("List", "Feedback")"
+                   class="btn btn-outline-primary">
+                    View Feedback List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

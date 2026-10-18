@@ -1,0 +1,87 @@
+﻿@model IEnumerable<StudentFeedback.Models.Feedback>
+
+@{
+    ViewBag.Title = "Feedback List";
+    Layout = "~/Views/Shared/_LayoutView.cshtml";
+}
+
+<div class="page-card">
+    @Html.Partial("~/Views/Shared/_StudentInfo.cshtml")
+
+    <div class="d-flex flex-wrap justify-content-between
+                align-items-center gap-3 mb-4">
+        <h4 class="mb-0 text-primary">Submitted Feedback</h4>
+
+        <span class="badge bg-primary fs-6">
+            Total Responses: @Model.Count()
+        </span>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover
+                      feedback-table mb-0">
+            <thead>
+                <tr>
+                    <th>Enrollment Number</th>
+                    <th>Student Name</th>
+                    <th>Subject Name</th>
+                    <th>Rating</th>
+                    <th>Comments</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m =>
+                                    item.EnrollmentNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m =>
+                                    item.StudentName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m =>
+                                    item.SubjectName)
+                            </td>
+                            <td>
+                                <span class="badge bg-success">
+                                    @item.Rating / 5
+                                </span>
+                            </td>
+                            <td class="text-break">
+                                @Html.DisplayFor(m =>
+                                    item.Comments)
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5"
+                            class="text-center text-secondary py-4">
+                            No feedback has been submitted yet.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex flex-wrap gap-3 mt-4">
+        <a href="@Url.Action("Create", "Feedback")"
+           class="btn btn-primary">
+            Another Feedback
+        </a>
+
+        <a href="@Url.Action("Index", "Feedback")"
+           class="btn btn-outline-secondary">
+            Back to Home
+        </a>
+    </div>
+</div>

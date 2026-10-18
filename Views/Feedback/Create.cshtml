@@ -1,0 +1,115 @@
+﻿@model StudentFeedback.Models.Feedback
+
+@{
+    ViewBag.Title = "Create Feedback";
+    Layout = "~/Views/Shared/_LayoutView.cshtml";
+}
+
+<div class="page-card">
+    @Html.Partial("~/Views/Shared/_StudentInfo.cshtml")
+
+    @using (Html.BeginForm("Create", "Feedback",
+                          FormMethod.Post,
+                          new { @class = "row g-4" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(false, "",
+            new { @class = "text-danger mb-3" })
+
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.EnrollmentNumber,
+                new { @class = "form-label" })
+
+            @Html.TextBoxFor(m => m.EnrollmentNumber,
+                new
+                     {
+                    @class = "form-control",
+                    placeholder = "Enter enrollment number"
+                })
+
+            @Html.ValidationMessageFor(m => m.EnrollmentNumber,
+                "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.StudentName,
+                new { @class = "form-label" })
+
+            @Html.TextBoxFor(m => m.StudentName,
+                new
+                     {
+                    @class = "form-control",
+                    placeholder = "Enter student name"
+                })
+
+            @Html.ValidationMessageFor(m => m.StudentName,
+                "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.SubjectName,
+                new { @class = "form-label" })
+
+            @Html.TextBoxFor(m => m.SubjectName,
+                new
+                     {
+                    @class = "form-control",
+                    placeholder = "Enter subject name"
+                })
+
+            @Html.ValidationMessageFor(m => m.SubjectName,
+                "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.Rating,
+                new { @class = "form-label" })
+
+            @Html.DropDownListFor(m => m.Rating,
+                new SelectList(new[] {
+                    new { Value = 1, Text = "1 - Poor" },
+                    new { Value = 2, Text = "2 - Fair" },
+                    new { Value = 3, Text = "3 - Good" },
+                    new { Value = 4, Text = "4 - Very Good" },
+                    new { Value = 5, Text = "5 - Excellent" }
+                }, "Value", "Text"),
+                "-- Select Rating --",
+                new { @class = "form-select" })
+
+            @Html.ValidationMessageFor(m => m.Rating,
+                "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-12">
+            @Html.LabelFor(m => m.Comments,
+                new { @class = "form-label" })
+
+            @Html.TextAreaFor(m => m.Comments,
+                new
+                     {
+                    @class = "form-control",
+                    rows = 4,
+                    placeholder = "Write your valuable feedback..."
+                })
+
+            @Html.ValidationMessageFor(m => m.Comments,
+                "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-12 d-flex flex-wrap gap-3">
+            <button type="submit" class="btn btn-primary">
+                Submit Feedback
+            </button>
+
+            <a href="@Url.Action("Index", "Feedback")"
+               class="btn btn-outline-secondary">
+                Back to Home
+            </a>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
